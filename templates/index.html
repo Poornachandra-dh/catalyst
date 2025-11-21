@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalyst | Data Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Courier+New&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='assets/logo.png') }}" alt="Catalyst Logo">
+                CATALYST
+            </div>
+            <div class="nav-links">
+                <a href="#" onclick="showSection('hero')">Home</a>
+                <a href="#" onclick="showSection('upload')">Upload</a>
+                <a href="#" onclick="showSection('dashboard')">Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="hero" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Data Cleaning.<br><span class="highlight">Simplified.</span></h1>
+                <p style="font-size: 1.2rem; margin: 20px 0; font-family: 'Courier New', monospace;">
+                    // Turn raw chaos into actionable insights.<br>
+                    // Zero fluff. Maximum productivity.
+                </p>
+                <div style="margin-top: 30px;">
+                    <button class="btn-neo" onclick="showSection('upload')">Start Processing</button>
+                    <button class="btn-neo btn-secondary" style="margin-left: 15px;">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Upload Section -->
+    <section id="upload" class="upload-section hidden">
+        <div class="container">
+            <div class="card-neo">
+                <h2>Upload Dataset</h2>
+                <p style="margin-bottom: 20px; font-family: var(--font-mono);">Supported formats: .CSV, .XLSX, .JSON</p>
+
+                <div class="drop-zone" id="dropZone">
+                    <div style="font-size: 4rem; margin-bottom: 20px;">📂</div>
+                    <h3>Drag & Drop Files Here</h3>
+                    <p>or click to browse</p>
+                    <input type="file" id="fileInput" style="display: none;" accept=".csv,.xlsx,.json">
+                </div>
+
+                <div id="fileList" style="margin-top: 20px; font-family: var(--font-mono);"></div>
+
+                <div style="margin-top: 30px; text-align: right;">
+                    <button class="btn-neo" id="processBtn" disabled onclick="processData()">Analyze Data</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="hidden" style="padding: 60px 0;">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px;">
+                <div>
+                    <h1>Analysis Report</h1>
+                    <p style="font-family: var(--font-mono);">STATUS: <span
+                            style="background: var(--color-neon); padding: 2px 5px;">COMPLETED</span></p>
+                </div>
+                <button class="btn-neo btn-secondary" onclick="showSection('upload')">New Upload</button>
+            </div>
+
+            <!-- Stats Row -->
+            <div class="dashboard-grid">
+                <div class="card-neo stat-card">
+                    <h3>Rows Processed</h3>
+                    <div class="stat-value" id="statRows">-</div>
+                </div>
+                <div class="card-neo stat-card">
+                    <h3>Clean Score</h3>
+                    <div class="stat-value" id="statScore">-</div>
+                </div>
+                <div class="card-neo stat-card">
+                    <h3>Missing Values</h3>
+                    <div class="stat-value" id="statMissing">-</div>
+                </div>
+            </div>
+
+            <!-- Charts Container -->
+            <div id="chartsContainer">
+                <!-- Charts will be injected here -->
+            </div>
+
+            <!-- Data Preview -->
+            <div class="card-neo" style="margin-top: 30px;">
+                <h3>Cleaned Data Preview</h3>
+                <div style="overflow-x: auto; margin-top: 20px; border: var(--border-thin);">
+                    <table id="previewTable"
+                        style="width: 100%; border-collapse: collapse; font-family: var(--font-mono);">
+                        <thead>
+                            <!-- Headers injected here -->
+                        </thead>
+                        <tbody>
+                            <!-- Rows injected here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 CATALYST INC. // BUILT FOR SPEED.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
